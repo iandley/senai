@@ -1,0 +1,12 @@
+SQL 
+Crie as seguintes consultas:
+  compras de um cliente especifico
+  campos: nome do cliente, produto, quantidade, valor total, data da venda
+  filtros: codigo do cliente
+
+SELECT clientes.cliente, vendas.data, itensvenda.quantidade, itensvenda.valortotal, produtos.produto
+FROM relacional.vendas AS vendas
+INNER JOIN relacional.clientes AS clientes ON vendas.idcliente = clientes.idcliente
+INNER JOIN relacional.itensvenda AS itensvenda ON vendas.idvenda = itensvenda.idvenda
+INNER JOIN relacional.produtos AS produtos ON itensvenda.idproduto = produtos.idproduto
+WHERE vendas.idcliente = 1;
