@@ -35,3 +35,40 @@ JOIN relacional.vendedores AS vendedores ON vendas.idvendedor = vendedores.idven
 GROUP BY vendedores.idvendedor, vendedores.nome
 ORDER BY total_vendas ASC
 LIMIT 5;
+
+
+
+
+
+===============================================================================================================================================================================================================
+
+total de vendas me periodo
+produto, total de vendas
+agrupado por produto
+filtro mes e ano 
+
+
+SELECT 
+    produtos.idproduto, 
+    produtos.produto, 
+    EXTRACT(MONTH FROM vendas.data) AS mes, 
+    EXTRACT(YEAR FROM vendas.data) AS ano, 
+    SUM(itensvenda.quantidade) AS total_vendas
+FROM 
+    relacional.itensvenda
+JOIN 
+    relacional.produtos ON itensvenda.idproduto = produtos.idproduto
+JOIN 
+    relacional.vendas ON itensvenda.idvenda = vendas.idvenda
+WHERE 
+    EXTRACT(MONTH FROM vendas.data) = 12
+    AND EXTRACT(YEAR FROM vendas.data) = 2016
+GROUP BY 
+    produtos.idproduto, 
+    produtos.produto, 
+    EXTRACT(MONTH FROM vendas.data), 
+    EXTRACT(YEAR FROM vendas.data)
+ORDER BY 
+    ano, mes;
+
+
