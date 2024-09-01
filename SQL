@@ -71,4 +71,32 @@ GROUP BY
 ORDER BY 
     ano, mes;
 
+=========================================================================================================================================================================================================
+
+
+
+produtos com maiores descontos
+produto, vendedor, total de desconto
+agrupado por produtos
+
+
+SELECT 
+    produtos.idproduto, 
+    produtos.produto, 
+    vendedores.nome AS vendedor, 
+    SUM(itensvenda.desconto) AS total_desconto
+FROM 
+    relacional.itensvenda
+JOIN 
+    relacional.produtos ON itensvenda.idproduto = produtos.idproduto
+JOIN 
+    relacional.vendas ON itensvenda.idvenda = vendas.idvenda
+JOIN 
+    relacional.vendedores ON vendas.idvendedor = vendedores.idvendedor
+GROUP BY 
+    produtos.idproduto, 
+    produtos.produto, 
+    vendedores.nome
+ORDER BY 
+    total_desconto DESC;
 
