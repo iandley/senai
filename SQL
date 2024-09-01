@@ -10,3 +10,28 @@ INNER JOIN relacional.clientes AS clientes ON vendas.idcliente = clientes.idclie
 INNER JOIN relacional.itensvenda AS itensvenda ON vendas.idvenda = itensvenda.idvenda
 INNER JOIN relacional.produtos AS produtos ON itensvenda.idproduto = produtos.idproduto
 WHERE vendas.idcliente = 1;
+
+===============================================================================================================================================================================================================
+
+
+listar 5 melhores/ piores vendedores 2 consultas
+campos nome do vendedor total de vendas
+agrupado por vendedor
+ordenado pelo total de vendas
+
+
+SELECT vendedores.idvendedor, vendedores.nome, SUM(vendas.total) AS total_vendas
+FROM relacional.vendas AS vendas
+JOIN relacional.vendedores AS vendedores ON vendas.idvendedor = vendedores.idvendedor
+GROUP BY vendedores.idvendedor, vendedores.nome
+ORDER BY total_vendas DESC
+LIMIT 5;
+
+
+
+SELECT vendedores.idvendedor, vendedores.nome, SUM(vendas.total) AS total_vendas
+FROM relacional.vendas AS vendas
+JOIN relacional.vendedores AS vendedores ON vendas.idvendedor = vendedores.idvendedor
+GROUP BY vendedores.idvendedor, vendedores.nome
+ORDER BY total_vendas ASC
+LIMIT 5;
